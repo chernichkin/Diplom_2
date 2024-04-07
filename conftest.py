@@ -15,7 +15,7 @@ def create_user_and_delete():
     yield response
     token = response.json()['accessToken']
     headers = {'Authorization': token}
-    requests.delete(Endpoints.END_DELETE, headers=headers)
+    requests.delete(Endpoints.END_USER, headers=headers)
 
 @pytest.fixture(scope='function')
 def create_user_for_login_and_delete():
@@ -29,7 +29,7 @@ def create_user_for_login_and_delete():
     token = response.json()['accessToken']
     yield login_payload, token
     headers = {'Authorization': token}
-    requests.delete(Endpoints.END_DELETE, headers=headers)
+    requests.delete(Endpoints.END_USER, headers=headers)
 
 
 
