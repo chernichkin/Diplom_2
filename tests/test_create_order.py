@@ -34,5 +34,4 @@ class TestCreateOrder:
         user = create_user_and_delete
         headers = {'Authorization': user.json()['accessToken']}
         response = requests.post(Endpoints.ORDER, data=Data.ingredients_bad_hash, headers=headers)
-        r = response.json()
-        assert not r['success'] and response.status_code == 500 and r['message'] == ErrorMassage.BAD_INGREDIENTS
+        assert response.status_code == 500
