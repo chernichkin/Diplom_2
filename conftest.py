@@ -11,11 +11,11 @@ def create_user_and_delete():
     name = fake.name()
     password = Data.password
     payload = {'email': email, 'password': password, 'name': name}
-    response = requests.post(Endpoints.END_REGISTER, data=payload)
+    response = requests.post(Endpoints.REGISTER, data=payload)
     yield response
     token = response.json()['accessToken']
     headers = {'Authorization': token}
-    requests.delete(Endpoints.END_USER, headers=headers)
+    requests.delete(Endpoints.USER, headers=headers)
 
 @pytest.fixture(scope='function')
 def create_user_for_login_and_delete():
@@ -24,12 +24,12 @@ def create_user_for_login_and_delete():
     name = fake.name()
     password = Data.password
     payload = {'email': email, 'password': password, 'name': name}
-    response = requests.post(Endpoints.END_REGISTER, data=payload)
+    response = requests.post(Endpoints.REGISTER, data=payload)
     login_payload = {'email': email, 'password': password}
     token = response.json()['accessToken']
     yield login_payload, token
     headers = {'Authorization': token}
-    requests.delete(Endpoints.END_USER, headers=headers)
+    requests.delete(Endpoints.USER, headers=headers)
 
 
 
