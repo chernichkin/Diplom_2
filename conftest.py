@@ -2,34 +2,14 @@ import requests
 import pytest
 from faker import Faker
 from constants import *
+from helper import generate_payloads
 
 
 @pytest.fixture(scope='function')
 def create_user_and_delete():
-    fake = Faker()
-    email = fake.email()
-    name = fake.name()
-    password = Data.password
-    payload = {'email': email, 'password': password, 'name': name}
-    response = requests.post(Endpoints.REGISTER, data=payload)
-    yield response
+    payload, login_payload = generate_payloads()
+    response = requests.post(Endpoints.URL + Endpoints.REGISTER, data=payload)
     token = response.json()['accessToken']
+    yield {'login_payload': login_payload, 'token': token, 'response': response}
     headers = {'Authorization': token}
-    requests.delete(Endpoints.USER, headers=headers)
-
-@pytest.fixture(scope='function')
-def create_user_for_login_and_delete():
-    fake = Faker()
-    email = fake.email()
-    name = fake.name()
-    password = Data.password
-    payload = {'email': email, 'password': password, 'name': name}
-    response = requests.post(Endpoints.REGISTER, data=payload)
-    login_payload = {'email': email, 'password': password}
-    token = response.json()['accessToken']
-    yield login_payload, token
-    headers = {'Authorization': token}
-    requests.delete(Endpoints.USER, headers=headers)
-
-
-
+    requests.delete(Endpoints.URL + Endpoints.USER, headers=headers)

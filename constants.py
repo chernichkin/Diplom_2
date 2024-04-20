@@ -2,11 +2,11 @@ import pytest
 
 
 class Endpoints:
-    URL = 'https://stellarburgers.nomoreparties.site/'
-    REGISTER = 'https://stellarburgers.nomoreparties.site/api/auth/register'
-    USER = 'https://stellarburgers.nomoreparties.site/api/auth/user'
-    LOGIN = 'https://stellarburgers.nomoreparties.site/api/auth/login'
-    ORDER = 'https://stellarburgers.nomoreparties.site/api/orders'
+    URL = 'https://stellarburgers.nomoreparties.site'
+    REGISTER = '/api/auth/register'
+    USER = '/api/auth/user'
+    LOGIN = '/api/auth/login'
+    ORDER = '/api/orders'
 
 
 class ErrorMassage:
@@ -21,6 +21,8 @@ class Data:
     password = '111111'
     wrong_password = '123456'
     updated_profile = {'email': 'btorres01010@gmail.com', 'name': 'Vincent Zola'}
+    updated_profile_email = {'email': 'btorres01010@gmail.com', 'name': 'Vincent Zola'}
+    updated_profile_name = {'name': 'Vincent Zola'}
     ingredients_hash = {
         "ingredients": ["61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa74", "61c0c5a71d1f82001bdaaa6e", "61c0c5a71d1f82001bdaaa6d"]
     }
